@@ -1,13 +1,13 @@
 <?php
-    include("cabecalho.php");
-    include("conecta.php"); 
-    include("banco-produto.php");
+    require_once("cabecalho.php");
+    require_once("banco-produto.php");
 
 
-    if(array_key_exists("removido", $_GET) && $_GET['removido']=='true') { 
+    if(isset($_SESSION["success"])) { 
 ?>
-    <p class="alert-success">Produto apagado com sucesso.</p>
+        <p class="alert-success"><?= $_SESSION["success"]?></p>
 <?php 
+        unset($_SESSION["success"]);
     }
     $produtos = listaProdutos($conexao);
 ?>
@@ -33,4 +33,4 @@
     <?php endforeach ?>
 </table>
 
-<?php include("rodape.php")?>
+<?php require_once("rodape.php")?>
